@@ -26,36 +26,43 @@ function writeToLog(operationIdentifier,
     console.log(logEntries);
 }
 
-function add(){
+function calculateResult(calculationType){
     const enteredNumber = getUserNumberInput();
     const initialReasult = currentResult;
-    currentResult += enteredNumber;
-    createAndWriteOutput('+', initialReasult, enteredNumber);
-    writeToLog('ADD', initialReasult, enteredNumber, currentResult);
+    let operator;
+
+    if(calculationType === 'ADD'){
+        currentResult += enteredNumber;
+        operator = '+';
+    } else if(calculationType === 'SUBTRACT'){
+        currentResult -= enteredNumber;
+        operator = '-';
+    } else if(calculationType === 'MULTIPLY'){
+        currentResult *= enteredNumber;
+        operator = '*';
+    } else if(calculationType === 'DIVIDE'){
+        currentResult /= enteredNumber;
+        operator = '/';
+    }
+
+    createAndWriteOutput(operator, initialReasult, enteredNumber);
+    writeToLog(calculationType, initialReasult, enteredNumber, currentResult);
+}
+
+function add(){
+    calculateResult('ADD');
 }
 
 function subtract(){
-    const enteredNumber = getUserNumberInput();
-    const initialReasult = currentResult;
-    currentResult -= enteredNumber;
-    createAndWriteOutput('+', initialReasult, enteredNumber);
-    writeToLog('SUBTRACT', initialReasult, enteredNumber, currentResult);
+    calculateResult('SUBTRACT');
 }
 
 function multiply(){
-    const enteredNumber = getUserNumberInput();
-    const initialReasult = currentResult;
-    currentResult *= enteredNumber;
-    createAndWriteOutput('*', initialReasult, enteredNumber);
-    writeToLog('MULTIPLY', initialReasult, enteredNumber, currentResult);
+    calculateResult('MULTIPLY');
 }
 
 function divide(){
-    const enteredNumber = getUserNumberInput();
-    const initialReasult = currentResult;
-    currentResult /= enteredNumber;
-    createAndWriteOutput('/', initialReasult, enteredNumber);
-    writeToLog('DIVIDE', initialReasult, enteredNumber, currentResult);
+    calculateResult('DIVIDE');
 }
 
 
